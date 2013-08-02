@@ -54,6 +54,14 @@ std::string ToString(const T& v1, const T& v2, const T& v3)
 	return ss.str();
 }
 
+template <typename T1, typename T2, typename T3>
+std::string ToString(const T1& v1, const T2& v2, const T3& v3)
+{
+	std::stringstream ss;
+	ss << v1 << v2 << v3;
+	return ss.str();
+}
+
 #if defined(_WINDOWS)
 std::string ErrorCodeToMsg( DWORD code );
 std::string LastErrorToMsg();
