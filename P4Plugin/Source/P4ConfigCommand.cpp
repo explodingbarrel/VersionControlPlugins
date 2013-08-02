@@ -166,6 +166,7 @@ public:
 		set<int> unitySupportedVersions;
 		set<int> pluginSupportedVersions;
 		
+		pluginSupportedVersions.insert(1);
 		pluginSupportedVersions.insert(2);
 		
 		// Read supported versions from unity
@@ -181,7 +182,20 @@ public:
 						 pluginSupportedVersions.begin(), pluginSupportedVersions.end(),
 						 inserter(candidates, candidates.end()));
 		if (candidates.empty())
+		{
+			Conn().ErrorLine( "Could not find matching supporting version for P4 plugin.", MAConfig);
+			Conn().ErrorLine( ToString( "unitySupportedVersions (", unitySupportedVersions.size(), "):" ), MAConfig);
+			for( set<int>::iterator it = unitySupportedVersions.begin(); it != unitySupportedVersions.end(); ++it )
+			{
+				Conn().ErrorLine( ToString( *it ), MAConfig);
+			}
+			Conn().ErrorLine( ToString( "pluginSupportedVersions (", pluginSupportedVersions.size(), "):" ), MAConfig);
+			for( set<int>::iterator it = pluginSupportedVersions.begin(); it != pluginSupportedVersions.end(); ++it )
+			{
+				Conn().ErrorLine( ToString( *it ), MAConfig);
+			}
 			return -1;
+		}
 		
 		return *candidates.rbegin();
 	}
