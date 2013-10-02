@@ -19,11 +19,16 @@ $testoption = "nonverbose" unless ($testoption);
 
 if (not $target)
 {
+	print "$^O";
 	if ($^O eq "darwin") 
 	{
 		$target = "mac";		
 	}
 	elsif ($^O eq "MSWin32") 
+	{
+		$target = "win32";
+	}
+	elsif ($^O eq "msys")
 	{
 		$target = "win32";
 	}
