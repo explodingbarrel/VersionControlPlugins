@@ -55,7 +55,8 @@ public:
 		{
 			if (PathExists(i->GetPath()))
 			{
-				i->AddState(kLocal);
+				//NOTE: Unity 4.2 freaks out if you set this
+				//i->AddState(kLocal);
 				if (IsReadOnly(i->GetPath()))
 					i->AddState(kReadOnly);
 			}

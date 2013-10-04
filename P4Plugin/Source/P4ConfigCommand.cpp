@@ -46,6 +46,21 @@ public:
 		{
 			task.SetP4Client(value);
 		}
+		/* this fixes the Version Control Plugin error when starting up, and adds in the "Incoming" tab to show changelists that are pending, but can significantly increases the startup time....
+		else if (key == "assetsPath")
+		{
+			if (task.GetProjectPath() == "")
+			{
+				size_t found = value.find_last_of("/");
+				if (found != std::string::npos)
+				{
+					value = value.substr(0, found);
+				}
+				task.SetProjectPath(TrimEnd(value));
+				Conn().Log().Info() << "Set projectPath w/ assetsPath to" << value << Endl;
+			}
+		}
+		*/
 		else if (key == "projectPath")
 		{
 			task.SetProjectPath(TrimEnd(value));

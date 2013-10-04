@@ -99,23 +99,31 @@ void P4StatusBaseCommand::OutputStat( StrDict *varList )
 	
 	if (PathExists(current.GetPath()))
 	{
-		current.AddState(kLocal);
+		//NOTE: Unity 4.2 freaks out if you have this set.
+		//current.AddState(kLocal); 
 		if (IsReadOnly(current.GetPath()))
+		{
 			current.AddState(kReadOnly);
+		}
 	}
 
 	if (!isStateSet)
 	{
 		int actionState = ActionToState(action, headAction, haveRev, headRev);
+		//Conn().Log().Debug() << "P4 Stat - action: " << action << " headAction: " << headAction << " haveRev:" << haveRev << " headRev: " << headRev << "state: " << actionState <<   Endl;
 		current.AddState((State)actionState);
-	}		
+	}	
 
 	Conn().VerboseLine(current.GetPath());
 	
 	if (m_StreamResultToConnection)
+	{
 		Conn() << current;
-	else
+	} 
+	else 
+	{
 		m_StatusResult.push_back(current);
+	}
 }
 
 void P4StatusBaseCommand::HandleError( Error *err )
@@ -147,7 +155,7 @@ void P4StatusBaseCommand::HandleError( Error *err )
 
 			if (PathExists(asset.GetPath()))
 			{
-				asset.AddState(kLocal);
+				//asset.AddState(kLocal);
 				if (IsReadOnly(asset.GetPath()))
 					asset.AddState(kReadOnly);
 			}
